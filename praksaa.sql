@@ -42,9 +42,11 @@ CREATE TABLE Delovi (
 );
 CREATE TABLE Porudzbine (
     PorudzbinaID INT PRIMARY KEY AUTO_INCREMENT,
-    DatumZaTermicku DATE,
-    VrstaTermickeObrade VARCHAR(255),
+    SifraDela VARCHAR(255),
+    NazivDela VARCHAR(255),
+    DatumZaPovrsinskuZastitu DATE,
+    DatumZaTermickuObradu DATE,
     DatumIsporukeDelova DATE,
     Kolicina INT,
-    GrPotrebnihSipki DECIMAL(10, 2)
+    BrojPotrebnihSipki DECIMAL(10, 2)
 );
