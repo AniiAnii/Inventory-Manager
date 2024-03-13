@@ -1,50 +1,51 @@
 <?php
-// Provjera da li je zahtjev poslan metod POST
+session_start(); // Start session
+
+// Check if the request method is POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Spajanje na bazu podataka
+    // Database connection parameters
     $hostname = "localhost";
     $username = "root";
     $password = "";
     $dbname = "praksaa";
 
-    // Provjera konekcije
+    // Connect to the database
     $conn = new mysqli($hostname, $username, $password, $dbname);
+    // Check connection
     if ($conn->connect_error) {
-        die("Neuspješna konekcija: " . $conn->connect_error);
+        die("Connection failed: " . $conn->connect_error);
     }
 
-    // Provjera sesije
-    if (!isset($_SESSION)) {
-        session_start();
-    }
+    // Prepare SQL statement for inserting a new order
+    $sql = "INSERT INTO Porudzbine (SifraDela, NazivDela, DatumZaPovrsinskuZastitu, DatumZaTermickuObradu, DatumIsporukeDelova, Kolicina, BrojPotrebnihSipki)
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-    // Priprema SQL upita za unos nove porudžbine
-    $sql = "INSERT INTO Porudzbine (DatumZaTermicku, VrstaTermickeObrade, DatumIsporukeDelova, Kolicina, GrPotrebnihSipki)
-    VALUES (?, ?, ?, ?, ?)";
-
-    // Priprema SQL naredbe za izvršenje s parametrima
+    // Prepare SQL statement with parameters
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssis", $_POST['datum_za_termicku'], $_POST['vrsta_termicke_obrade'], $_POST['datum_isporuke_delova'], $_POST['kolicina'], $_POST['gr_potrebnih_sipki']);
+    // Bind parameters
+    $stmt->bind_param("sssssss", $_POST['sifra_dela'], $_POST['naziv_dela'], $_POST['datum_za_povrsinsku_zastitu'], $_POST['datum_za_termicku_obradu'], $_POST['datum_isporuke_delova'], $_POST['kolicina'], $_POST['broj_potrebnih_sipki']);
 
-    // Izvršavanje pripremljene SQL naredbe
+    // Execute prepared SQL statement
     if ($stmt->execute() === TRUE) {
         echo "Nova porudžbina je uspješno dodana.";
 
-        // Zatvaranje konekcije
+        // Close statement
         $stmt->close();
+        // Close connection
         $conn->close();
 
-        // Preusmjeravanje na početnu stranicu nakon 2 sekunde
+        // Redirect to index.php after 2 seconds
         echo '<script>
-        setTimeout(function() {
-            window.location.href = "index.php";
-        }, 2000);
+            setTimeout(function() {
+                window.location.href = "index.php";
+            }, 2000);
         </script>';
     } else {
         echo "Greška prilikom dodavanja porudžbine: " . $stmt->error;
 
-        // Zatvaranje konekcije
+        // Close statement
         $stmt->close();
+        // Close connection
         $conn->close();
     }
 }
@@ -62,11 +63,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h2>Dodaj porudžbinu</h2>
 
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        <label for="datum_za_termicku">Datum Za Termičku:</label>
-        <input type="date" id="datum_za_termicku" name="datum_za_termicku"><br><br>
+        <label for="sifra_dela">Šifra Dela:</label>
+        <input type="text" id="sifra_dela" name="sifra_dela"><br><br>
 
-        <label for="vrsta_termicke_obrade">Vrsta Termičke Obrade:</label>
-        <input type="text" id="vrsta_termicke_obrade" name="vrsta_termicke_obrade"><br><br>
+        <label for="naziv_dela">Naziv Dela:</label>
+        <input type="text" id="naziv_dela" name="naziv_dela"><br><br>
+
+        <label for="datum_za_povrsinsku_zastitu">Datum Za Površinsku Zaštitu:</label>
+        <input type="date" id="datum_za_povrsinsku_zastitu" name="datum_za_povrsinsku_zastitu"><br><br>
+
+        <label for="datum_za_termicku_obradu">Datum Za Termičku Obradu:</label>
+        <input type="date" id="datum_za_termicku_obradu" name="datum_za_termicku_obradu"><br><br>
 
         <label for="datum_isporuke_delova">Datum Isporuke Delova:</label>
         <input type="date" id="datum_isporuke_delova" name="datum_isporuke_delova"><br><br>
@@ -74,12 +81,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label for="kolicina">Količina:</label>
         <input type="number" id="kolicina" name="kolicina"><br><br>
 
-        <label for="gr_potrebnih_sipki">Gr Potrebnih Sipki:</label>
-        <input type="text" id="gr_potrebnih_sipki" name="gr_potrebnih_sipki"><br><br>
+        <label for="broj_potrebnih_sipki">Broj Potrebnih Šipki:</label>
+        <input type="number" id="broj_potrebnih_sipki" name="broj_potrebnih_sipki"><br><br>
 
         <input type="submit" value="Dodaj porudžbinu">
     </form>
-
 
 </body>
 
