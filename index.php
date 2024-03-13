@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html>
 <?php
 include 'connection.php'; 
 
@@ -78,6 +76,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.send("PorudzbinaID=" + PorudzbinaID + "&status=poslat");
         }
+
+        function showOrders(firmName) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Update the HTML content with the fetched orders
+                        document.getElementById("orders").innerHTML = xhr.responseText;
+                    } else {
+                        alert("Error fetching orders.");
+                    }
+                }
+            };
+            xhr.open("GET", "get_orders.php?firmName=" + encodeURIComponent(firmName), true);
+            xhr.send();
+        }
+
     </script>
 
 </head>
@@ -85,9 +100,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
     <h2> Firme </h2>
-    <form method="get" action="add_firm.php">
-        <input type="submit" value="Dodaj firmu" class="dugme">
-    </form>
 
     <!-- Display firms -->
     <?php
@@ -96,15 +108,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result_firms = $conn->query($sql_firms);
 
     if ($result_firms->num_rows > 0) {
-        echo "<ul>";
+        echo "<ul class='firm-list'>"; // Add a class to the ul element
         while ($row_firm = $result_firms->fetch_assoc()) {
-            echo "<li>" . $row_firm["name"] . "</li>";
-        }
+            echo "<li>" . $row_firm["name"] . " <button onclick='showOrders(\"" . $row_firm["name"] . "\")'>Prikazi porudzbine</button></li>";
+        }        
         echo "</ul>";
     } else {
         echo "Nema firmi.";
     }
     ?>
+    <div id="orders"></div>
+
+    <br>
+
+    <form method="get" action="add_firm.php">
+        <input type="submit" value="Dodaj firmu" class="dugme">
+    </form>
 
     <h2>Unos novog dela</h2>
     <a href="unos_novog_dela.php" class="dugme">Unos novog dela</a>
