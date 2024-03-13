@@ -1,5 +1,6 @@
 <?php
-session_start(); // Start session
+// Initialize an empty array to store errors
+$errors = array();
 
 // Check if the request method is POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -18,27 +19,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($stmt->execute() === TRUE) {
         echo "Nova porudžbina je uspješno dodana.";
 
-        // Close statement
-        $stmt->close();
-        // Close connection
-        $conn->close();
+        // Get the last inserted order ID
+        $orderId = $stmt->insert_id;
 
-        // Redirect to index.php after 2 seconds
-        echo '<script>
-            setTimeout(function() {
-                window.location.href = "index.php";
-            }, 2000);
-        </script>';
+        // Insert into firm_orders table
+        $firmId = $_POST['firm']; // Assuming 'firm' is the name of the select element
+        $status = "porucen";
+
+        $sql_firm_orders = "INSERT INTO firm_orders (firmId, orderId, status) VALUES (?, ?, ?)";
+        $stmt_firm_orders = $conn->prepare($sql_firm_orders);
+        $stmt_firm_orders->bind_param("iis", $firmId, $orderId, $status);
+
+        if ($stmt_firm_orders->execute() === TRUE) {
+            echo "Nova porudžbina je uspješno dodana u firm_orders.";
+        } else {
+            echo "Greška prilikom dodavanja porudžbine u firm_orders: " . $stmt_firm_orders->error;
+        }
+
+        // Close statement
+        $stmt_firm_orders->close();
     } else {
         echo "Greška prilikom dodavanja porudžbine: " . $stmt->error;
-
-        // Close statement
-        $stmt->close();
-        // Close connection
-        $conn->close();
     }
+
+    // Close statement
+    $stmt->close();
+    // Close connection
+    $conn->close();
+}
+
+// Fetch firms from the database
+include 'connection.php';
+$sql_firms = "SELECT * FROM firm";
+$result_firms = $conn->query($sql_firms);
+
+// Check if there are any errors in fetching firms
+if (!$result_firms) {
+    $errors[] = "Error fetching firms: " . $conn->error;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -51,7 +71,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <h2>Dodaj porudžbinu</h2>
 
+    <?php
+    // Display errors, if any
+    if (!empty($errors)) {
+        echo "<h3>Errors:</h3>";
+        foreach ($errors as $error) {
+            echo "<p>$error</p>";
+        }
+    }
+    ?>
+
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <!-- Add firm selection dropdown -->
+        <label for="firm">Firma:</label>
+        <select id="firm" name="firm">
+            <?php
+            // Display firms in the dropdown menu
+            if ($result_firms->num_rows > 0) {
+                while ($row_firm = $result_firms->fetch_assoc()) {
+                    echo "<option value='" . $row_firm["firmId"] . "'>" . $row_firm["name"] . "</option>";
+                }
+            } else {
+                echo "<option value=''>Nema dostupnih firmi</option>";
+            }
+            ?>
+        </select><br><br>
+
         <label for="sifra_dela">Šifra Dela:</label>
         <input type="text" id="sifra_dela" name="sifra_dela"><br><br>
 
