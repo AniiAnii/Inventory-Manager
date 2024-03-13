@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <?php
+include 'connection.php'; 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
     $name = $_POST["name"];
@@ -15,65 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 <head>
+    <link rel="stylesheet" type="text/css" href="styles/index.css">
     <title>Unos novog dela</title>
-    <style>
-        /* Stilizacija linka kao dugmeta */
-        .dugme {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #ccc;
-            /* Siva boja */
-            color: #fff;
-            /* Bijela boja teksta */
-            text-decoration: none;
-            /* Uklanja podvučen link */
-            border-radius: 5px;
-            /* Zaobljeni rubovi */
-            transition: background-color 0.3s;
-            /* Glatka promjena boje */
-        }
-
-        .dugme:hover {
-            background-color: #999;
-            /* Siva boja na hover */
-        }
-
-        /* CSS za stilizaciju modalnog dijaloga */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 2px solid #333;
-            border-radius: 10px;
-            width: 80%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .close {
-            color: red;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: darkred;
-        }
-    </style>
     <script>
         // JavaScript za otvaranje/zatvaranje modalnog dijaloga
         function showDeleteConfirmation(PorudzbinaID) {
@@ -122,6 +67,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <a href="unos_novog_dela.php" class="dugme">Unos novog dela</a>
     </div>
 
+    <h2> Firme </h2>
+    <form method="get" action="add_firm.php">
+        <input type="submit" value="Dodaj firmu" class="dugme">
+    </form>
+
     <h2>Unos novog dela</h2>
 
     <h2>Porudžbine</h2>
@@ -133,18 +83,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div style="height: 20px;"></div>
 
     <?php
-    // Spajanje na bazu podataka
-    $hostname = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "praksaa"; // Proverite da li je ovo ispravno ime baze podataka
-
-    // Provjera konekcije
-    $conn = new mysqli($hostname, $username, $password, $dbname);
-    if ($conn->connect_error) {
-        die("Neuspješna konekcija: " . $conn->connect_error);
-    }
-
     // Dohvatanje porudžbina iz baze podataka
     $sql = "SELECT * FROM Porudzbine";
     $result = $conn->query($sql);

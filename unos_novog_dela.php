@@ -16,18 +16,7 @@
     <?php
     // Provjeravamo da li je forma poslana
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Spajamo se na bazu podataka
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "praksaa";
-
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        // Provjeravamo konekciju
-        if ($conn->connect_error) {
-            die("Neuspjela konekcija: " . $conn->connect_error);
-        }
+        include 'connection.php'; 
 
         // Pripremamo SQL upit za unos novog dijela
         $sql = "INSERT INTO delovi (RedniBroj, Sifra, Naziv, VrstaMaterijala, Zastita, KomadiIzSipke, MeraProizvodaGrami)

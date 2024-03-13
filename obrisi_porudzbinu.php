@@ -1,19 +1,9 @@
 <?php
-// Ukoliko nije prosleđen ID porudžbine, preusmeri na početnu stranicu
+include 'connection.php'; 
+
 if (!isset($_GET['id'])) {
     header("Location: index.php");
     exit();
-}
-
-// Spajanje na bazu podataka
-$hostname = "localhost";
-$username = "root";
-$password = "";
-$dbname = "praksaa";
-
-$conn = new mysqli($hostname, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Neuspješna konekcija: " . $conn->connect_error);
 }
 
 // Priprema SQL upita za brisanje porudžbine sa odgovarajućim ID-jem

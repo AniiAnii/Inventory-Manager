@@ -3,18 +3,7 @@ session_start(); // Start session
 
 // Check if the request method is POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Database connection parameters
-    $hostname = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "praksaa";
-
-    // Connect to the database
-    $conn = new mysqli($hostname, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    include 'connection.php';
 
     // Prepare SQL statement for inserting a new order
     $sql = "INSERT INTO Porudzbine (SifraDela, NazivDela, DatumZaPovrsinskuZastitu, DatumZaTermickuObradu, DatumIsporukeDelova, Kolicina, BrojPotrebnihSipki)
