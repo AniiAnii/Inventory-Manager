@@ -1,5 +1,18 @@
 <!DOCTYPE html>
 <html>
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+
+    // Process the form data (you can perform database operations or any other tasks here)
+    // For demonstration, let's just print the submitted data
+    echo "Name: " . $name . "<br>";
+    echo "Email: " . $email . "<br>";
+}
+?>
+
 
 <head>
     <title>Unos novog dela</title>
@@ -140,20 +153,24 @@
     if ($result->num_rows > 0) {
         echo "<table border='1'>";
         echo "<tr>
-                    <th>Datum Za Termičku</th>
-                    <th>Vrsta Termičke Obrade</th>
+                    <th>Šifra Dela</th>
+                    <th>Naziv Dela</th>
+                    <th>Datum Za Povrsinsku Zastitu</th>
+                    <th>Datum Za Termičku Obradu</th>
                     <th>Datum Isporuke Delova</th>
                     <th>Količina</th>
-                    <th>Gr Potrebnih Sipki</th>
+                    <th>Broj Potrebnih Šipki</th>
                     <th>Akcija</th>
                 </tr>";
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
-            echo "<td>" . $row["DatumZaTermicku"] . "</td>";
-            echo "<td>" . $row["VrstaTermickeObrade"] . "</td>";
+            echo "<td>" . $row["SifraDela"] . "</td>"; //*
+            echo "<td>" . $row["NazivDela"] . "</td>"; //*
+            echo "<td>" . $row["DatumZaPovrsinskuZastitu"] . "</td>"; //*
+            echo "<td>" . $row["DatumZaTermickuObradu"] . "</td>"; //*
             echo "<td>" . $row["DatumIsporukeDelova"] . "</td>";
             echo "<td>" . $row["Kolicina"] . "</td>";
-            echo "<td>" . $row["GrPotrebnihSipki"] . "</td>";
+            echo "<td>" . $row["BrojPotrebnihSipki"] . "</td>";
             echo "<td><button onclick='showDeleteConfirmation(" . $row['PorudzbinaID'] . ")'>Obriši</button></td>";
             echo "</tr>";
         }
