@@ -25,10 +25,9 @@ Sifra dela
 Naziv dela
 Datum za povrsinsku zastitu
 Datum za termicku
-Vrsta termicke obrade
-Datum isporuke mop. zastite
 Datum isporuke delova
 Kolicina
 Broj potrebnih sipki
+
 Firma id
 Delovi id
