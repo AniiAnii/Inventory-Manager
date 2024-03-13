@@ -50,3 +50,7 @@ CREATE TABLE Porudzbine (
     Kolicina INT,
     BrojPotrebnihSipki DECIMAL(10, 2)
 );
+CREATE TABLE firm (
+    firmId BIGINT PRIMARY KEY,
+    name VARCHAR(255)
+);
