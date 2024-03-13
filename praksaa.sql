@@ -54,3 +54,8 @@ CREATE TABLE firm (
     firmId BIGINT PRIMARY KEY,
     name VARCHAR(255)
 );
+CREATE TABLE firm_orders (
+    firmId VARCHAR(255),
+    orderId INT AUTO_INCREMENT PRIMARY KEY,
+    status ENUM('porucen', 'prihvacen', 'odbijen', 'poslat')
+);
