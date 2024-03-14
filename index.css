@@ -1,0 +1,66 @@
+.dugme {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ccc;
+    /* Siva boja */
+    color: #fff;
+    /* Bijela boja teksta */
+    text-decoration: none;
+    /* Uklanja podvučen link */
+    border-radius: 5px;
+    /* Zaobljeni rubovi */
+    transition: background-color 0.3s;
+    /* Glatka promjena boje */
+}
+
+.dugme:hover {
+    background-color: #999;
+    /* Siva boja na hover */
+}
+
+/* CSS za stilizaciju modalnog dijaloga */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    color: red;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: darkred;
+}
+
+.firm-list {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0;
+    margin: 0;
+}
+
+.firm-list li {
+    display: inline; /* Display list items horizontally */
+    margin-right: 10px; /* Add some space between list items */
+}
