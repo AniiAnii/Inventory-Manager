@@ -1,18 +1,18 @@
 OBAVEZE 
 
-Napraviti i izmeniti sve tabele 
+Napraviti i izmeniti sve tabele GOTOVO 
 Napraviti glavnu stranu 
 	STATICNI 
 	- navbar
 	- naslovi 
-	- dugmici ispod tabela
+	- dugmici ispod tabela 
 	DINAMICNI
-	- tabele 
-	- izvrsavanje dugmica
+	- tabele GOTOVO
+	- izvrsavanje dugmica DELIMICNO
 
-Odraditi dinamicno predstavljanje delova na glavnoj strani
-Uraditi dugmice da te odvedu na drugu stranu sa dodavanjem novog dela
-Odraditi dinamicno predstavljanje firme na glavnoj strani
-Uraditi dugmice da te odvedu na drugu stranu sa dodavanjem nove firme
-Odraditi dinamicno predstavljanje porudzbina na glavnoj strani
-Uraditi dugmice da te odvedu na drugu stranu sa dodavanjem nove porudzbine
+Odraditi dinamicno predstavljanje delova na glavnoj strani GOTOVO
+Uraditi dugmice da te odvedu na drugu stranu sa dodavanjem novog dela GOTOVO
+Odraditi dinamicno predstavljanje firme na glavnoj strani GOTOVO
+Uraditi dugmice da te odvedu na drugu stranu sa dodavanjem nove firme GOTOVO
+Odraditi dinamicno predstavljanje porudzbina na glavnoj strani GOTOVO
+Uraditi dugmice da te odvedu na drugu stranu sa dodavanjem nove porudzbine GOTOVO
