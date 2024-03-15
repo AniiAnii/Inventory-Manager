@@ -30,15 +30,16 @@ CREATE TABLE PorudzbinaStavke (
     FOREIGN KEY (PorudzbinaID) REFERENCES Porudzbine(PorudzbinaID),
     FOREIGN KEY (ProizvodID) REFERENCES Proizvodi(ProizvodID)
 );
--- Kreiranje tablice Delovi
-CREATE TABLE Delovi (
-    RedniBroj INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE Deo (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Slika LONGBLOB,
     Sifra VARCHAR(255),
     Naziv VARCHAR(255),
     VrstaMaterijala VARCHAR(255),
-    Zastita VARCHAR(255),
+    PrecnikMaterijala VARCHAR(255),
+    MestoObavljenjaPovrsinskeZastite VARCHAR(255),
     KomadiIzSipke INT,
-    MeraProizvodaGrami DECIMAL(10, 2)
+    MeraProizvodaUGramima FLOAT
 );
 CREATE TABLE Porudzbine (
     PorudzbinaID INT PRIMARY KEY AUTO_INCREMENT,
@@ -59,3 +60,4 @@ CREATE TABLE firm_orders (
     orderId INT AUTO_INCREMENT PRIMARY KEY,
     status ENUM('porucen', 'prihvacen', 'odbijen', 'poslat')
 );
+
