@@ -1,19 +1,7 @@
 <?php
 include 'connection.php'; 
 
-// pitaj sta je ovo?!?
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-
-    // Process the form data (you can perform database operations or any other tasks here)
-    // For demonstration, let's just print the submitted data
-    echo "Name: " . $name . "<br>";
-    echo "Email: " . $email . "<br>";
-}
 ?>
-
 
 <head>
     <link rel="stylesheet" type="text/css" href="styles/index.css">
@@ -126,8 +114,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
 
     <h2>Unos novog dela</h2>
-    <a href="unos_novog_dela.php" class="dugme">Unos novog dela</a>
+    <a href="add_new_part.php" class="dugme">Unos novog dela</a>
     
+    <?php
+        $sql = "SELECT * FROM delovi";
+        $result = $conn->query($sql);
+
+    ?>
+
+
+    <h2>Table Content</h2>
+
+    <!-- Display table -->
+    <table border="1">
+        <tr>
+            <th>Picture</th>
+            <th>Sifra</th>
+            <th>Naziv</th>
+            <th>Vrsta Materijala</th>
+            <th>Precnik Materijala</th>
+            <th>Zastita</th>
+            <th>Komadi Iz Sipke</th>
+            <th>Mera Proizvoda Grami</th>
+        </tr>
+        <?php
+        // Check if there are rows in the result
+        if ($result->num_rows > 0) {
+            // Loop through each row and display data in table cells
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td><img src='" . $row["PicturePath"] . "' alt='Slika'></td>";
+                echo "<td>" . $row["Sifra"] . "</td>";
+                echo "<td>" . $row["Naziv"] . "</td>";
+                echo "<td>" . $row["VrstaMaterijala"] . "</td>";
+                echo "<td>" . $row["RedniBroj"] . "</td>";
+                echo "<td>" . $row["Zastita"] . "</td>";
+                echo "<td>" . $row["KomadiIzSipke"] . "</td>";
+                echo "<td>" . $row["MeraProizvodaGrami"] . "</td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='9'>Nema podataka u tabeli.</td></tr>";
+        }
+        ?>
+    </table>
+
     <h2>Porudžbine</h2>
 
     <form method="get" action="dodaj_porudzbinu.php">

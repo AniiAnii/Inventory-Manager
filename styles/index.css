@@ -53,3 +53,14 @@
 .close:focus {
     color: darkred;
 }
+
+.firm-list {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0;
+    margin: 0;
+}
+
+.firm-list li {
+    display: inline; /* Display list items horizontally */
+    margin-right: 10px; /* Add some space between list items */
+}
