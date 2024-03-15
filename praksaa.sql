@@ -38,7 +38,8 @@ CREATE TABLE Delovi (
     VrstaMaterijala VARCHAR(255),
     Zastita VARCHAR(255),
     KomadiIzSipke INT,
-    MeraProizvodaGrami DECIMAL(10, 2)
+    MeraProizvodaGrami DECIMAL(10, 2),
+    PicturePath VARCHAR(255)
 );
 CREATE TABLE Porudzbine (
     PorudzbinaID INT PRIMARY KEY AUTO_INCREMENT,
