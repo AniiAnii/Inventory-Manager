@@ -64,63 +64,59 @@ if (!$result_firms) {
 <html>
 
 <head>
+    <link rel="stylesheet" type="text/css" href="styles/add_order.css">
     <title>Dodaj porudžbinu</title>
 </head>
 
-<body>
-
-    <h2>Dodaj porudžbinu</h2>
-
-    <?php
-    // Display errors, if any
-    if (!empty($errors)) {
-        echo "<h3>Errors:</h3>";
-        foreach ($errors as $error) {
-            echo "<p>$error</p>";
-        }
-    }
-    ?>
-
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        <!-- Add firm selection dropdown -->
-        <label for="firm">Firma:</label>
-        <select id="firm" name="firm">
-            <?php
-            // Display firms in the dropdown menu
-            if ($result_firms->num_rows > 0) {
-                while ($row_firm = $result_firms->fetch_assoc()) {
-                    echo "<option value='" . $row_firm["firmId"] . "'>" . $row_firm["name"] . "</option>";
+<body class="body">
+    <div class="container">
+        <h2 class="heading">Dodaj porudžbinu</h2>
+        <form class="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <!-- Add firm selection dropdown -->
+            <label for="firm" class="label">Firma:</label>
+            <select id="firm" name="firm" class="input">
+                <?php
+                // Display firms in the dropdown menu
+                if ($result_firms->num_rows > 0) {
+                    while ($row_firm = $result_firms->fetch_assoc()) {
+                        echo "<option value='" . $row_firm["firmId"] . "'>" . $row_firm["name"] . "</option>";
+                    }
+                } else {
+                    echo "<option value=''>Nema dostupnih firmi</option>";
                 }
-            } else {
-                echo "<option value=''>Nema dostupnih firmi</option>";
-            }
-            ?>
-        </select><br><br>
+                ?>
+            </select><br><br>
 
-        <label for="sifra_dela">Šifra Dela:</label>
-        <input type="text" id="sifra_dela" name="sifra_dela"><br><br>
+            <label for="sifra_dela" class="label">Šifra Dela:</label>
+            <input type="text" id="sifra_dela" name="sifra_dela" class="input"><br><br>
 
-        <label for="naziv_dela">Naziv Dela:</label>
-        <input type="text" id="naziv_dela" name="naziv_dela"><br><br>
+            <label for="naziv_dela" class="label">Naziv Dela:</label>
+            <input type="text" id="naziv_dela" name="naziv_dela" class="input"><br><br>
 
-        <label for="datum_za_povrsinsku_zastitu">Datum Za Površinsku Zaštitu:</label>
-        <input type="date" id="datum_za_povrsinsku_zastitu" name="datum_za_povrsinsku_zastitu"><br><br>
+            <label for="datum_za_povrsinsku_zastitu" class="label">Datum Za Površinsku Zaštitu:</label>
+            <input type="date" id="datum_za_povrsinsku_zastitu" name="datum_za_povrsinsku_zastitu" class="input"><br><br>
 
-        <label for="datum_za_termicku_obradu">Datum Za Termičku Obradu:</label>
-        <input type="date" id="datum_za_termicku_obradu" name="datum_za_termicku_obradu"><br><br>
+            <label for="datum_za_termicku_obradu" class="label">Datum Za Termičku Obradu:</label>
+            <input type="date" id="datum_za_termicku_obradu" name="datum_za_termicku_obradu" class="input"><br><br>
 
-        <label for="datum_isporuke_delova">Datum Isporuke Delova:</label>
-        <input type="date" id="datum_isporuke_delova" name="datum_isporuke_delova"><br><br>
+            <label for="datum_isporuke_delova" class="label">Datum Isporuke Delova:</label>
+            <input type="date" id="datum_isporuke_delova" name="datum_isporuke_delova" class="input"><br><br>
 
-        <label for="kolicina">Količina:</label>
-        <input type="number" id="kolicina" name="kolicina"><br><br>
+            <label for="kolicina" class="label">Količina:</label>
+            <input type="number" id="kolicina" name="kolicina" class="input"><br><br>
 
-        <label for="broj_potrebnih_sipki">Broj Potrebnih Šipki:</label>
-        <input type="number" id="broj_potrebnih_sipki" name="broj_potrebnih_sipki"><br><br>
+            <label for="broj_potrebnih_sipki" class="label">Broj Potrebnih Šipki:</label>
+            <input type="number" id="broj_potrebnih_sipki" name="broj_potrebnih_sipki" class="input"><br><br>
 
-        <input type="submit" value="Dodaj porudžbinu">
-    </form>
-
+            <input type="submit" value="Dodaj porudžbinu" class="submit">
+        </form>
+    </div>
+    <div class="leaves">
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+    </div>
 </body>
 
 </html>
