@@ -1,16 +1,25 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #9a8e83;
-    /* Set your desired background color */
+    /* Remove background-color and set background image */
+    background-image: url('background/back2.jpg');
+    background-size: 100% auto;
+    /* Fit the entire width of the screen */
+
+    background-repeat: no-repeat;
+    /* Prevent image from repeating */
+
+    /* Cover the entire background */
+    background-position: center;
+    /* Center the background image */
     color: white;
 }
 
 .dugme {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #262626;
+    background-color: #fdfd96;
     /* Siva boja */
-    color: white;
+    color: rgb(0, 0, 0);
     /* Bijela boja teksta */
     text-decoration: none;
     /* Uklanja podvučen link */
@@ -71,11 +80,42 @@ body {
 }
 
 .firm-list li {
-    display: inline;
-    /* Display list items horizontally */
+    display: inline-block;
+    /* Display list items inline */
     margin-right: 10px;
     /* Add some space between list items */
 }
+
+.firm-list li a {
+    font-size: 18px;
+    /* Decrease font size */
+    display: inline-block;
+    padding: 15px;
+    /* Decrease padding */
+    background-color: #262626;
+    color: white;
+    text-decoration: none;
+    transform: skewX(-10deg);
+    margin-right: 10px;
+    width: 70px;
+    /* Decrease width */
+    height: 20px;
+    /* Decrease height */
+    text-align: center;
+    line-height: 40px;
+
+
+    border: 2px solid white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.firm-list li a:hover {
+    transform: skewX(-10deg) scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
 
 .body {
     background-color: rgb(191, 205, 216);
@@ -90,7 +130,7 @@ body {
 .custom-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #50647c;
+    background-color: #797979;
 }
 
 .custom-table th,
@@ -114,3 +154,49 @@ body {
     /* Adjust the max-width as needed */
     height: auto;
 }
+
+/* Modal dialog */
+.Amodal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Modal content */
+.Amodal-content {
+    color: #000000;
+    font-size: 18px;
+    background-color: #f4c68a85;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #686666;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+
+
+/* Button styles  dont work */
+/*
+.Abutton {
+    background-color: #111110;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}    */
