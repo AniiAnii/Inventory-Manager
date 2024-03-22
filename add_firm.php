@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Firm Registration</title>
 </head>
+
 <body>
     <form action="insert_firm.php" method="post">
         <label for="firmName">Firm Name:</label>
@@ -10,4 +12,5 @@
         <input type="submit" value="Submit">
     </form>
 </body>
+
 </html>

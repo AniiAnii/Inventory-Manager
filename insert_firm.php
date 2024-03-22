@@ -1,5 +1,5 @@
 <?php
-include 'connection.php'; 
+include 'connection.php';
 
 // Generate a random firmId
 $firmId = rand(1, 92233720368547758); // Example: Generates a random number between 1000 and 9999
@@ -18,4 +18,3 @@ if ($conn->query($sql) === TRUE) {
 
 // Close the connection
 $conn->close();
-?>

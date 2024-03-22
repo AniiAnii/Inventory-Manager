@@ -37,6 +37,7 @@ CREATE TABLE Delovi (
     Naziv VARCHAR(255),
     VrstaMaterijala VARCHAR(255),
     Zastita VARCHAR(255),
+    PrecnikMaterijala INT,
     KomadiIzSipke INT,
     MeraProizvodaGrami DECIMAL(10, 2),
     PicturePath VARCHAR(255)

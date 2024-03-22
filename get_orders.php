@@ -55,4 +55,3 @@ if (isset($_GET['firmName'])) {
         echo "Firm not found.";
     }
 }
-?>

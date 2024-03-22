@@ -111,12 +111,7 @@ if (!$result_firms) {
             <input type="submit" value="Dodaj porudžbinu" class="submit">
         </form>
     </div>
-    <div class="leaves">
-        <div class="leaf"></div>
-        <div class="leaf"></div>
-        <div class="leaf"></div>
-        <div class="leaf"></div>
-    </div>
+
 </body>
 
 </html>
