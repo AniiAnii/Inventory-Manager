@@ -1,18 +1,5 @@
-OBAVEZE 
-
-Napraviti i izmeniti sve tabele 
-Napraviti glavnu stranu 
-	STATICNI 
-	- navbar
-	- naslovi 
-	- dugmici ispod tabela
-	DINAMICNI
-	- tabele 
-	- izvrsavanje dugmica
-
-Odraditi dinamicno predstavljanje delova na glavnoj strani
-Uraditi dugmice da te odvedu na drugu stranu sa dodavanjem novog dela
-Odraditi dinamicno predstavljanje firme na glavnoj strani
-Uraditi dugmice da te odvedu na drugu stranu sa dodavanjem nove firme
-Odraditi dinamicno predstavljanje porudzbina na glavnoj strani
-Uraditi dugmice da te odvedu na drugu stranu sa dodavanjem nove porudzbine
+1. Debbug add_new_part.php
+2. Kada se klikne na porudzbina gotova, da se skloni iz tabele i da se prikaze u delu prikazi porudzbinu kod firme
+3.Dodati mogucnost brisanje firmi
+4.Umesto dugmeta prikazi porudzbine, da sam naziv firme izvrsava tu funkciju i da se doda da kada se opet klikne na firmu da se lista porudzbine skloni
+5.Da kada se unese porudzbina ili novi deo da se automatski vrati na pocestnu stranicu i da se doda dugme sa strelicom nazad koja nas vraca na pocetnu stranicu
