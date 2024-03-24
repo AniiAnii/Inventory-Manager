@@ -74,7 +74,7 @@ include 'connection.php';
         // JavaScript function to show or hide orders table
         function showOrders(firmName) {
             var ordersDiv = document.getElementById("orders");
-            
+
             // If orders are already visible, hide them
             if (ordersDiv.style.display === 'block' && ordersDiv.getAttribute('data-firm') === firmName) {
                 ordersDiv.style.display = 'none';
@@ -97,7 +97,6 @@ include 'connection.php';
                 xhr.send();
             }
         }
-
     </script>
 </head>
 
@@ -119,6 +118,7 @@ include 'connection.php';
         </div>
     </div>
 
+
     <h2> Firme </h2>
 
     <!-- Display firms -->
@@ -137,15 +137,67 @@ include 'connection.php';
         echo "Nema firmi.";
     }
     ?>
+
     <div id="orders"></div>
 
+
     <br>
+
+    <!-- Button to delete firm -->
+    <button onclick="openDeleteModal()" class="dugme">Obrisi firmu</button>
+
+    <!-- Modal for deleting a firm -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDeleteModal()">&times;</span>
+            <h2>Obrisi firmu</h2>
+            <p>Koju firmu želite da obrišete?</p>
+            <input type="text" id="deleteFirmName" required>
+            <button onclick="deleteFirm()">Potvrdi</button>
+        </div>
+    </div>
+
+
 
     <!-- Button to open the modal -->
     <button onclick="openModal()" class="dugme">Dodaj firmu</button>
 
     <!-- JavaScript for the modal -->
     <script>
+        // Function to open the delete modal
+        function openDeleteModal() {
+            document.getElementById("deleteModal").style.display = "block";
+        }
+
+        // Function to close the delete modal
+        function closeDeleteModal() {
+            document.getElementById("deleteModal").style.display = "none";
+        }
+
+        // Function to delete a firm
+        function deleteFirm() {
+            var firmName = document.getElementById("deleteFirmName").value;
+
+            // Send AJAX request to delete_firm.php
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // On successful deletion, close modal and reload page
+                        closeDeleteModal();
+                        window.location.reload();
+                    } else {
+                        // If deletion fails, show error message
+                        alert("Error deleting firm: " + xhr.responseText);
+                    }
+                }
+            };
+            xhr.open("POST", "delete_firm.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send("firmName=" + encodeURIComponent(firmName));
+        }
+
+
         // Function to open the modal
         function openModal() {
             document.getElementById("myModal").style.display = "block";

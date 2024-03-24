@@ -65,12 +65,13 @@ if (!$result_firms) {
 
 <head>
     <link rel="stylesheet" type="text/css" href="styles/add_order.css">
-    <title>Dodaj porudžbinu</title>
+    < <title>Dodaj porudžbinu</title>
 </head>
 
 <body class="body">
     <div class="container">
-        <h2 class="heading">Dodaj porudžbinu</h2>
+        <a class="a" href="index.php">Vrati se</a>
+        <h2 class=" heading">Dodaj porudžbinu</h2>
         <form class="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <!-- Add firm selection dropdown -->
             <label for="firm" class="label">Firma:</label>
