@@ -71,21 +71,33 @@ include 'connection.php';
         }
 
 
+        // JavaScript function to show or hide orders table
         function showOrders(firmName) {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        // Update the HTML content with the fetched orders
-                        document.getElementById("orders").innerHTML = xhr.responseText;
-                    } else {
-                        alert("Error fetching orders.");
+            var ordersDiv = document.getElementById("orders");
+            
+            // If orders are already visible, hide them
+            if (ordersDiv.style.display === 'block' && ordersDiv.getAttribute('data-firm') === firmName) {
+                ordersDiv.style.display = 'none';
+            } else {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            // Update the HTML content with the fetched orders
+                            ordersDiv.innerHTML = xhr.responseText;
+                            // Show orders and set the firm name attribute
+                            ordersDiv.style.display = 'block';
+                            ordersDiv.setAttribute('data-firm', firmName);
+                        } else {
+                            alert("Error fetching orders.");
+                        }
                     }
-                }
-            };
-            xhr.open("GET", "get_orders.php?firmName=" + encodeURIComponent(firmName), true);
-            xhr.send();
+                };
+                xhr.open("GET", "get_orders.php?firmName=" + encodeURIComponent(firmName), true);
+                xhr.send();
+            }
         }
+
     </script>
 </head>
 
@@ -178,110 +190,117 @@ include 'connection.php';
     $result = $conn->query($sql);
 
     ?>
-    <div class="table-wrapper">
-        <table class="custom-table">
-            <tr>
-                <th>Picture</th>
-                <th>Sifra</th>
-                <th>Naziv</th>
-                <th>Vrsta Materijala</th>
-                <th>Precnik Materijala</th>
-                <th>Zastita</th>
-                <th>Komadi Iz Sipke</th>
-                <th>Mera Proizvoda Grami</th>
-            </tr>
-            <?php
-            // Check if there are rows in the result
-            if ($result->num_rows > 0) {
-                // Loop through each row and display data in table cells
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td><img src='" . $row["PicturePath"] . "' alt='Slika'></td>";
-                    echo "<td>" . $row["Sifra"] . "</td>";
-                    echo "<td>" . $row["Naziv"] . "</td>";
-                    echo "<td>" . $row["VrstaMaterijala"] . "</td>";
-                    echo "<td>" . $row["RedniBroj"] . "</td>";
-                    echo "<td>" . $row["Zastita"] . "</td>";
-                    echo "<td>" . $row["KomadiIzSipke"] . "</td>";
-                    echo "<td>" . $row["MeraProizvodaGrami"] . "</td>";
-                    echo "</tr>";
+    <div class="underlay">
+        <div class="table-wrapper">
+            <table class="custom-table">
+                <tr>
+                    <th>Picture</th>
+                    <th>Sifra</th>
+                    <th>Naziv</th>
+                    <th>Vrsta Materijala</th>
+                    <th>Precnik Materijala</th>
+                    <th>Zastita</th>
+                    <th>Komadi Iz Sipke</th>
+                    <th>Mera Proizvoda Grami</th>
+                </tr>
+                <?php
+                // Check if there are rows in the result
+                if ($result->num_rows > 0) {
+                    // Loop through each row and display data in table cells
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td><img src='" . $row["PicturePath"] . "' alt='Slika'></td>";
+                        echo "<td>" . $row["Sifra"] . "</td>";
+                        echo "<td>" . $row["Naziv"] . "</td>";
+                        echo "<td>" . $row["VrstaMaterijala"] . "</td>";
+                        echo "<td>" . $row["RedniBroj"] . "</td>";
+                        echo "<td>" . $row["Zastita"] . "</td>";
+                        echo "<td>" . $row["KomadiIzSipke"] . "</td>";
+                        echo "<td>" . $row["MeraProizvodaGrami"] . "</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='9'>Nema podataka u tabeli.</td></tr>";
                 }
-            } else {
-                echo "<tr><td colspan='9'>Nema podataka u tabeli.</td></tr>";
-            }
-            ?>
-        </table>
-    </div <h2>Porudžbine</h2>
+                ?>
+            </table>
+        </div>
+    </div>
+
+    <h2>Porudžbine</h2>
 
     <form method="get" action="dodaj_porudzbinu.php">
         <input type="submit" value="Dodaj porudžbinu" class="dugme">
     </form>
 
     <div style="height: 20px;"></div>
-    <div class="table-wrapper">
-        <table class="custom-table">
-            <?php
-            // Dohvatanje porudžbina iz baze podataka
-            $sql = "SELECT p.*, f.name AS firm_name, fo.status 
-        FROM Porudzbine p 
-        INNER JOIN firm_orders fo ON p.PorudzbinaID = fo.orderId 
-        INNER JOIN firm f ON fo.firmId = f.firmId
-        ORDER BY DatumIsporukeDelova ASC"; // Sortiranje po DatumIsporukeDelova u opadajućem redosledu
-            $result = $conn->query($sql);
+    <div class="underlay">
+        <div class="table-wrapper">
+            <table class="custom-table">
+                <?php
+                // Dohvatanje porudžbina iz baze podataka
+                $sql = "SELECT p.*, f.name AS firm_name, fo.status 
+            FROM Porudzbine p 
+            INNER JOIN firm_orders fo ON p.PorudzbinaID = fo.orderId 
+            INNER JOIN firm f ON fo.firmId = f.firmId
+            ORDER BY DatumIsporukeDelova ASC"; // Sortiranje po DatumIsporukeDelova u opadajućem redosledu
+                $result = $conn->query($sql);
 
-            // Prikazivanje porudžbina u obliku tabele
-            if ($result->num_rows > 0) {
-                echo "<table border='1'>";
-                echo "<tr>
-            <th>Firma</th>
-            <th>Šifra Dela</th>
-            <th>Naziv Dela</th>
-            <th>Datum Za Povrsinsku Zastitu</th>
-            <th>Datum Za Termičku Obradu</th>
-            <th>Datum Isporuke Delova</th>
-            <th>Količina</th>
-            <th>Broj Potrebnih Šipki</th>
-            <th>Status</th>
-            <th>Akcija</th>
-          </tr>";
+                // Prikazivanje porudžbina u obliku tabele
+                if ($result->num_rows > 0) {
+                    echo "<table border='1'>";
+                    echo "<tr>
+                <th>Firma</th>
+                <th>Šifra Dela</th>
+                <th>Naziv Dela</th>
+                <th>Datum Za Povrsinsku Zastitu</th>
+                <th>Datum Za Termičku Obradu</th>
+                <th>Datum Isporuke Delova</th>
+                <th>Količina</th>
+                <th>Broj Potrebnih Šipki</th>
+                <th>Status</th>
+                <th>Akcija</th>
+            </tr>";
 
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . $row["firm_name"] . "</td>";
-                    echo "<td>" . $row["SifraDela"] . "</td>"; //*
-                    echo "<td>" . $row["NazivDela"] . "</td>"; //*
-                    echo "<td>" . $row["DatumZaPovrsinskuZastitu"] . "</td>"; //*
-                    echo "<td>" . $row["DatumZaTermickuObradu"] . "</td>"; //*
-                    echo "<td>" . $row["DatumIsporukeDelova"] . "</td>";
-                    echo "<td>" . $row["Kolicina"] . "</td>";
-                    echo "<td>" . $row["BrojPotrebnihSipki"] . "</td>";
-                    echo "<td>" . $row["status"] . "</td>";
-                    echo "<td><button onclick='showDeleteConfirmation(" . $row['PorudzbinaID'] . ")'>Obriši</button></td>";
-                    echo "<td><button onclick='prihvatiPorudzbinu(" . $row['PorudzbinaID'] . ")'>Porudzbina gotova</button></td>";
-                    echo "</tr>";
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row["firm_name"] . "</td>";
+                        echo "<td>" . $row["SifraDela"] . "</td>"; //*
+                        echo "<td>" . $row["NazivDela"] . "</td>"; //*
+                        echo "<td>" . $row["DatumZaPovrsinskuZastitu"] . "</td>"; //*
+                        echo "<td>" . $row["DatumZaTermickuObradu"] . "</td>"; //*
+                        echo "<td>" . $row["DatumIsporukeDelova"] . "</td>";
+                        echo "<td>" . $row["Kolicina"] . "</td>";
+                        echo "<td>" . $row["BrojPotrebnihSipki"] . "</td>";
+                        echo "<td>" . $row["status"] . "</td>";
+                        echo "<td><button onclick='showDeleteConfirmation(" . $row['PorudzbinaID'] . ")'>Obriši</button></td>";
+                        echo "<td><button onclick='prihvatiPorudzbinu(" . $row['PorudzbinaID'] . ")'>Porudzbina gotova</button></td>";
+                        echo "</tr>";
+                    }
+                    echo "</table>";
+                } else {
+                    echo "Nema porudžbina.";
                 }
-                echo "</table>";
-            } else {
-                echo "Nema porudžbina.";
-            }
 
-            // Zatvaranje konekcije
-            $conn->close();
-            ?>
-            <!-- Ovdje dodajte redove sa podacima o porudžbinama -->
-            </tbody>
+                // Zatvaranje konekcije
+                $conn->close();
+                ?>
+                <!-- Ovdje dodajte redove sa podacima o porudžbinama -->
+                </tbody>
 
-        </table>
+            </table>
 
-        <!-- Modal dialog for delete confirmation -->
-        <div id="deleteModal" class="Amodal">
-            <div class="Amodal-content">
-                <span class="close">&times;</span>
-                <p>Da li ste sigurni da želite obrisati ovu porudžbinu?</p>
-                <button id="confirmDelete">Da</button>
-                <button id="cancelDelete">Ne</button>
+            <!-- Modal dialog for delete confirmation -->
+            <div id="deleteModal" class="Amodal">
+                <div class="Amodal-content">
+                    <span class="close">&times;</span>
+                    <p>Da li ste sigurni da želite obrisati ovu porudžbinu?</p>
+                    <button id="confirmDelete">Da</button>
+                    <button id="cancelDelete">Ne</button>
+                </div>
             </div>
         </div>
+    </div>
 
 
 </body>
