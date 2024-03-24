@@ -40,6 +40,21 @@ include 'connection.php';
             }
         }
 
+        function showDeleteConfirmation2(orderId) {
+            if (confirm("Are you sure you want to delete this order?")) {
+                // If user confirms deletion, make an AJAX request to delete the order
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        // If deletion is successful, reload the page to reflect changes
+                        location.reload();
+                    }
+                };
+                xhttp.open("GET", "delete_order.php?orderId=" + orderId, true);
+                xhttp.send();
+            }
+        }
+
         // Funkcija za brisanje porudžbine
         function obrisiPorudzbinu(id) {
             // Pitamo korisnika da li je siguran da želi obrisati porudžbinu
@@ -119,7 +134,7 @@ include 'connection.php';
     </div>
 
 
-    <h2> Firme </h2>
+    <h1> Firme </h1>
 
     <!-- Display firms -->
     <?php
@@ -130,7 +145,7 @@ include 'connection.php';
     if ($result_firms->num_rows > 0) {
         echo "<ul class='firm-list'>"; // Add a class to the ul element
         while ($row_firm = $result_firms->fetch_assoc()) {
-            echo "<li><a href='#'>" . $row_firm["name"] . "</a> <button class='firm_button' onclick='showOrders(\"" . $row_firm["name"] . "\")'>Prikazi porudzbine</button></li>";
+            echo "<li><a href='#'>" . $row_firm["name"] . "</a> <button class='dugme2' onclick='showOrders(\"" . $row_firm["name"] . "\")'>Prikazi porudzbine</button></li>";
         }
         echo "</ul>";
     } else {
@@ -138,8 +153,9 @@ include 'connection.php';
     }
     ?>
 
-    <div id="orders"></div>
-
+    <div class="underlay">
+        <div id="orders"></div>
+    </div>
 
     <br>
 
@@ -234,7 +250,7 @@ include 'connection.php';
         });
     </script>
 
-    <h2>Delovi</h2>
+    <h1>Delovi</h1>
     <a href="add_new_part.php" class="dugme">Unos novog dela</a>
 
     <?php
@@ -246,7 +262,7 @@ include 'connection.php';
         <div class="table-wrapper">
             <table class="custom-table">
                 <tr>
-                    <th>Picture</th>
+                    <th></th>
                     <th>Sifra</th>
                     <th>Naziv</th>
                     <th>Vrsta Materijala</th>
@@ -279,7 +295,7 @@ include 'connection.php';
         </div>
     </div>
 
-    <h2>Porudžbine</h2>
+    <h1>Porudžbine</h1>
 
     <form method="get" action="dodaj_porudzbinu.php">
         <input type="submit" value="Dodaj porudžbinu" class="dugme">
@@ -325,8 +341,8 @@ include 'connection.php';
                         echo "<td>" . $row["Kolicina"] . "</td>";
                         echo "<td>" . $row["BrojPotrebnihSipki"] . "</td>";
                         echo "<td>" . $row["status"] . "</td>";
-                        echo "<td><button onclick='showDeleteConfirmation(" . $row['PorudzbinaID'] . ")'>Obriši</button></td>";
-                        echo "<td><button onclick='prihvatiPorudzbinu(" . $row['PorudzbinaID'] . ")'>Porudzbina gotova</button></td>";
+                        echo "<td><button class='dugme2' onclick='showDeleteConfirmation2(" . $row['PorudzbinaID'] . ")'>Obriši</button></td>";
+                        echo "<td><button class='dugme2' onclick='prihvatiPorudzbinu(" . $row['PorudzbinaID'] . ")'>Gotovo</button></td>";
                         echo "</tr>";
                     }
                     echo "</table>";

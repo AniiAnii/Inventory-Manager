@@ -43,8 +43,8 @@ if (isset($_GET['firmName'])) {
                 echo "<td>" . $row_order["Kolicina"] . "</td>";
                 echo "<td>" . $row_order["BrojPotrebnihSipki"] . "</td>";
                 echo "<td>" . $row_order["status"] . "</td>";
-                echo "<td><button onclick='showDeleteConfirmation(" . $row_order['PorudzbinaID'] . ")'>Obriši</button></td>";
-                echo "<td><button onclick='prihvatiPorudzbinu(" . $row_order['PorudzbinaID'] . ")'>Porudzbina gotova</button></td>";
+                echo "<td><button class='dugme2' onclick='showDeleteConfirmation2(" . $row_order['PorudzbinaID'] . ")'>Obriši</button></td>";
+                echo "<td><button class='dugme2' onclick='prihvatiPorudzbinu(" . $row_order['PorudzbinaID'] . ")'>Porudzbina gotova</button></td>";
                 echo "</tr>";
             }
             echo "</table>";

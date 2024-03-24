@@ -1,7 +1,7 @@
 /* Global styles */
 body {
     font-family: Arial, sans-serif;
-    background-image: url('background/njahh.jpg');
+    background-image: url('background/bgk.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     color: white;
@@ -126,10 +126,56 @@ body {
 }
 
 .underlay {
+    padding-left: 30px;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     padding: 20px;
     border-radius: 10px;
     margin-top: 20px;
     /* Adjust margin as needed */
+}
+
+h1 {
+    padding-top:40px;
+    padding-bottom:20px;
+    text-align: center;
+    color:#fdfd96;
+}
+
+/* Button styles */
+.dugme2,
+.Abutton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #c2d1dc;
+    color: #000;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    width: auto; /* Set width to auto or a fixed value */
+}
+
+.dugme2:hover,
+.Abutton:hover {
+    background-color: #3d6886;
+    color: white;
+}
+
+/* Button styles */
+.button,
+.Abutton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #c2d1dc;
+    color: #000;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    width: auto; /* Set width to auto or a fixed value */
+}
+
+.button:hover,
+.Abutton:hover {
+    background-color: #3d6886;
+    color: white;
 }
