@@ -116,9 +116,91 @@ include 'connection.php';
 </head>
 
 <body>
+
+    <header>
+        <img src="logooo.png" style='height:100px; width=100px;'>
+        <h2>DESKE metal press</h2>
+    </header>
     <!-- Dodati skriveni input za čuvanje ID-ja porudžbine -->
     <input type="hidden" id="deleteOrderId" name="deleteOrderId">
 
+
+    <div class='spacer'> </div>
+
+    <h1>Porudžbine</h1>
+
+    <form method="get" action="dodaj_porudzbinu.php">
+        <input type="submit" value="Dodaj porudžbinu" class="dugme">
+    </form>
+
+    <div style="height: 20px;"></div>
+    <div class="underlay">
+        <div class="table-wrapper">
+            <table class="custom-table">
+                <?php
+                // Dohvatanje porudžbina iz baze podataka
+                $sql = "SELECT p.*, f.name AS firm_name, fo.status 
+            FROM Porudzbine p 
+            INNER JOIN firm_orders fo ON p.PorudzbinaID = fo.orderId 
+            INNER JOIN firm f ON fo.firmId = f.firmId
+            ORDER BY DatumIsporukeDelova ASC"; // Sortiranje po DatumIsporukeDelova u opadajućem redosledu
+                $result = $conn->query($sql);
+
+                // Prikazivanje porudžbina u obliku tabele
+                if ($result->num_rows > 0) {
+                    echo "<table border='1'>";
+                    echo "<tr>
+                <th>Firma</th>
+                <th>Šifra Dela</th>
+                <th>Naziv Dela</th>
+                <th>Datum Za Povrsinsku Zastitu</th>
+                <th>Datum Za Termičku Obradu</th>
+                <th>Datum Isporuke Delova</th>
+                <th>Količina</th>
+                <th>Broj Potrebnih Šipki</th>
+                <th>Status</th>
+                <th>Akcija</th>
+            </tr>";
+
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row["firm_name"] . "</td>";
+                        echo "<td>" . $row["SifraDela"] . "</td>"; //*
+                        echo "<td>" . $row["NazivDela"] . "</td>"; //*
+                        echo "<td>" . $row["DatumZaPovrsinskuZastitu"] . "</td>"; //*
+                        echo "<td>" . $row["DatumZaTermickuObradu"] . "</td>"; //*
+                        echo "<td>" . $row["DatumIsporukeDelova"] . "</td>";
+                        echo "<td>" . $row["Kolicina"] . "</td>";
+                        echo "<td>" . $row["BrojPotrebnihSipki"] . "</td>";
+                        echo "<td>" . $row["status"] . "</td>";
+                        echo "<td><button class='dugme2' onclick='showDeleteConfirmation2(" . $row['PorudzbinaID'] . ")'>Obriši</button></td>";
+                        echo "<td><button class='dugme2' onclick='prihvatiPorudzbinu(" . $row['PorudzbinaID'] . ")'>Gotovo</button></td>";
+                        echo "</tr>";
+                    }
+                    echo "</table>";
+                } else {
+                    echo "Nema porudžbina.";
+                }
+
+                // Zatvaranje konekcije
+                ?>
+                <!-- Ovdje dodajte redove sa podacima o porudžbinama -->
+                </tbody>
+
+            </table>
+
+            <!-- Modal dialog for delete confirmation -->
+            <div id="deleteModal" class="Amodal">
+                <div class="Amodal-content">
+                    <span class="close">&times;</span>
+                    <p>Da li ste sigurni da želite obrisati ovu porudžbinu?</p>
+                    <button id="confirmDelete">Da</button>
+                    <button id="cancelDelete">Ne</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- Ostatak koda ostaje isti -->
     <!-- Modal dialog -->
     <div id="myModal" class="Firm_modal">
@@ -294,82 +376,6 @@ include 'connection.php';
             </table>
         </div>
     </div>
-
-    <h1>Porudžbine</h1>
-
-    <form method="get" action="dodaj_porudzbinu.php">
-        <input type="submit" value="Dodaj porudžbinu" class="dugme">
-    </form>
-
-    <div style="height: 20px;"></div>
-    <div class="underlay">
-        <div class="table-wrapper">
-            <table class="custom-table">
-                <?php
-                // Dohvatanje porudžbina iz baze podataka
-                $sql = "SELECT p.*, f.name AS firm_name, fo.status 
-            FROM Porudzbine p 
-            INNER JOIN firm_orders fo ON p.PorudzbinaID = fo.orderId 
-            INNER JOIN firm f ON fo.firmId = f.firmId
-            ORDER BY DatumIsporukeDelova ASC"; // Sortiranje po DatumIsporukeDelova u opadajućem redosledu
-                $result = $conn->query($sql);
-
-                // Prikazivanje porudžbina u obliku tabele
-                if ($result->num_rows > 0) {
-                    echo "<table border='1'>";
-                    echo "<tr>
-                <th>Firma</th>
-                <th>Šifra Dela</th>
-                <th>Naziv Dela</th>
-                <th>Datum Za Povrsinsku Zastitu</th>
-                <th>Datum Za Termičku Obradu</th>
-                <th>Datum Isporuke Delova</th>
-                <th>Količina</th>
-                <th>Broj Potrebnih Šipki</th>
-                <th>Status</th>
-                <th>Akcija</th>
-            </tr>";
-
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $row["firm_name"] . "</td>";
-                        echo "<td>" . $row["SifraDela"] . "</td>"; //*
-                        echo "<td>" . $row["NazivDela"] . "</td>"; //*
-                        echo "<td>" . $row["DatumZaPovrsinskuZastitu"] . "</td>"; //*
-                        echo "<td>" . $row["DatumZaTermickuObradu"] . "</td>"; //*
-                        echo "<td>" . $row["DatumIsporukeDelova"] . "</td>";
-                        echo "<td>" . $row["Kolicina"] . "</td>";
-                        echo "<td>" . $row["BrojPotrebnihSipki"] . "</td>";
-                        echo "<td>" . $row["status"] . "</td>";
-                        echo "<td><button class='dugme2' onclick='showDeleteConfirmation2(" . $row['PorudzbinaID'] . ")'>Obriši</button></td>";
-                        echo "<td><button class='dugme2' onclick='prihvatiPorudzbinu(" . $row['PorudzbinaID'] . ")'>Gotovo</button></td>";
-                        echo "</tr>";
-                    }
-                    echo "</table>";
-                } else {
-                    echo "Nema porudžbina.";
-                }
-
-                // Zatvaranje konekcije
-                $conn->close();
-                ?>
-                <!-- Ovdje dodajte redove sa podacima o porudžbinama -->
-                </tbody>
-
-            </table>
-
-            <!-- Modal dialog for delete confirmation -->
-            <div id="deleteModal" class="Amodal">
-                <div class="Amodal-content">
-                    <span class="close">&times;</span>
-                    <p>Da li ste sigurni da želite obrisati ovu porudžbinu?</p>
-                    <button id="confirmDelete">Da</button>
-                    <button id="cancelDelete">Ne</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
 </body>
 
