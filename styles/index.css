@@ -5,14 +5,9 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     color: white;
+    margin: 0;
 }
 
-/* Header styles */
-.header {
-    text-align: right;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-}
 
 /* Button styles */
 .dugme,
@@ -178,4 +173,30 @@ h1 {
 .Abutton:hover {
     background-color: #3d6886;
     color: white;
+}
+
+/* Header styles */
+header {
+    background-color: rgba(0, 0, 0, 0.4); /* Background color for the header */
+    text-align: center; /* Center-align the content */
+    position: fixed; /* Fixed positioning */
+    top: 0; /* Stick to the top of the viewport */
+    width: 100%; /* Full width */
+    z-index: 1000; /* Ensure it's above other content */
+    margin-left:0px;
+}
+
+
+header h2 {
+    color: #e0a71f; /* Text color for the firm name */
+    margin: 0; /* Remove default margin */
+    font-family: 'Arial Black', sans-serif; /* Use a bold font */
+    font-size: 28px; /* Increase font size */
+    text-transform: uppercase; /* Convert text to uppercase */
+    letter-spacing: 2px; /* Add letter spacing */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Add text shadow */
+}
+
+.spacer{
+    padding-top:100px;
 }
