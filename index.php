@@ -118,7 +118,7 @@ include 'connection.php';
 <body>
 
     <header>
-        <img src="logooo.png" style='height:100px; width=100px;'>
+        <img src="logooo.png" style='height:100px; width:100px;'>
         <h2>DESKE metal press</h2>
     </header>
     <!-- Dodati skriveni input za čuvanje ID-ja porudžbine -->
@@ -200,7 +200,7 @@ include 'connection.php';
             </div>
         </div>
     </div>
-    
+
     <!-- Ostatak koda ostaje isti -->
     <!-- Modal dialog -->
     <div id="myModal" class="Firm_modal">
@@ -242,12 +242,12 @@ include 'connection.php';
     <br>
 
     <!-- Button to delete firm -->
-    <button onclick="openDeleteModal()" class="dugme">Obrisi firmu</button>
+    <button onclick="openDeleteFirmModal()" class="dugme">Obrisi firmu</button>
 
     <!-- Modal for deleting a firm -->
-    <div id="deleteModal" class="modal">
+    <div id="deleteFirmModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeDeleteModal()">&times;</span>
+            <span class="close" onclick="closeDeleteFirmModal()">&times;</span>
             <h2>Obrisi firmu</h2>
             <p>Koju firmu želite da obrišete?</p>
             <input type="text" id="deleteFirmName" required>
@@ -260,16 +260,17 @@ include 'connection.php';
     <!-- Button to open the modal -->
     <button onclick="openModal()" class="dugme">Dodaj firmu</button>
 
+
     <!-- JavaScript for the modal -->
     <script>
-        // Function to open the delete modal
-        function openDeleteModal() {
-            document.getElementById("deleteModal").style.display = "block";
+        // Function to open the delete modal for firm
+        function openDeleteFirmModal() {
+            document.getElementById("deleteFirmModal").style.display = "block";
         }
 
-        // Function to close the delete modal
-        function closeDeleteModal() {
-            document.getElementById("deleteModal").style.display = "none";
+        // Function to close the delete modal for firm
+        function closeDeleteFirmModal() {
+            document.getElementById("deleteFirmModal").style.display = "none";
         }
 
         // Function to delete a firm
@@ -282,7 +283,7 @@ include 'connection.php';
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
                         // On successful deletion, close modal and reload page
-                        closeDeleteModal();
+                        closeDeleteFirmModal();
                         window.location.reload();
                     } else {
                         // If deletion fails, show error message
