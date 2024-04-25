@@ -1,0 +1,33 @@
+TABELE U BAZI PODATAKA
+
+DELOVI
+slika
+sifra dela
+naziv dela
+vrsta materijala
+precnik materijala
+mesto bavljenja povrsinske zastite
+Komadi iz sipke
+Mera proizvoda u granama 
+
+FIRME
+Redni broj firme 
+Naziv firme 
+Broj porudzbina 
+Otkloni
+
+FIRMA-PORUDZBINE
+Firma id
+Porudzbina id
+
+PORUDZBINA
+Sifra dela
+Naziv dela
+Datum za povrsinsku zastitu
+Datum za termicku
+Datum isporuke delova
+Kolicina
+Broj potrebnih sipki
+
+Firma id
+Delovi id

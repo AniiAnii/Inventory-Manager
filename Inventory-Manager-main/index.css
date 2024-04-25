@@ -1,0 +1,217 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('background/bgk.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    margin: 0;
+}
+
+
+/* Button styles */
+.dugme,
+.Abutton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #fdfd96;
+    color: #000;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dugme:hover,
+.Abutton:hover {
+    background-color: #a69713;
+    color: white;
+}
+
+/* Modal styles */
+.modal,
+.Amodal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content,
+.Amodal-content {
+    color: #000000;
+    font-size: 18px;
+    background-color: #f4c68a85;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #686666;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Firm list styles */
+.firm-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.firm-list li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.firm-list li a {
+    font-size: 18px;
+    display: inline-block;
+    padding: 15px;
+    background-color: #393636;
+    color: white;
+    text-decoration: none;
+    border: 2px solid white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin-bottom: 10px;
+    /* Add space below each company name */
+}
+
+.firm-list li a:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+
+}
+
+/* Table styles */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    /* background-color: #797979; */
+}
+
+.custom-table th,
+.custom-table td {
+    padding: 8px;
+    border: 1px solid #f4f5f6;
+    color: white;
+}
+
+.custom-table th {
+    /* background-color: #262626; */
+    text-align: left;
+}
+
+.custom-table td {
+    text-align: center;
+}
+
+.custom-table img {
+    max-width: 100px;
+    height: auto;
+}
+
+.underlay {
+    padding-left: 30px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    /* Adjust margin as needed */
+}
+
+h1 {
+    padding-top: 40px;
+    padding-bottom: 20px;
+    text-align: center;
+    color: #fdfd96;
+}
+
+/* Button styles */
+.dugme2,
+.Abutton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #c2d1dc;
+    color: #000;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    width: auto;
+    /* Set width to auto or a fixed value */
+}
+
+.dugme2:hover,
+.Abutton:hover {
+    background-color: #3d6886;
+    color: white;
+}
+
+/* Button styles */
+.button,
+.Abutton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #c2d1dc;
+    color: #000;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    width: auto;
+    /* Set width to auto or a fixed value */
+}
+
+.button:hover,
+.Abutton:hover {
+    background-color: #3d6886;
+    color: white;
+}
+
+/* Header styles */
+header {
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Background color for the header */
+    text-align: center;
+    /* Center-align the content */
+    position: fixed;
+    /* Fixed positioning */
+    top: 0;
+    /* Stick to the top of the viewport */
+    width: 100%;
+    /* Full width */
+    z-index: 1000;
+    /* Ensure it's above other content */
+    margin-left: 0px;
+}
+
+
+header h2 {
+    color: #3d6886;
+    /* Text color for the firm name */
+    margin: 0;
+    /* Remove default margin */
+    font-family: 'Arial Black', sans-serif;
+    /* Use a bold font */
+    font-size: 28px;
+    /* Increase font size */
+    text-transform: uppercase;
+    /* Convert text to uppercase */
+    letter-spacing: 2px;
+    /* Add letter spacing */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    /* Add text shadow */
+}
+
+.spacer {
+    padding-top: 100px;
+}
