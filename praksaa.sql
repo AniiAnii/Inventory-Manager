@@ -25,10 +25,8 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `delovi`
 --
-
 DROP TABLE IF EXISTS `delovi`;
 CREATE TABLE IF NOT EXISTS `delovi` (
-    `RedniBroj` int NOT NULL AUTO_INCREMENT,
     `Sifra` varchar(191) NOT NULL,
     `Naziv` varchar(255) DEFAULT NULL,
     `VrstaMaterijala` varchar(255) DEFAULT NULL,
@@ -37,9 +35,9 @@ CREATE TABLE IF NOT EXISTS `delovi` (
     `KomadiIzSipke` int DEFAULT NULL,
     `MeraProizvodaGrami` decimal(10, 2) DEFAULT NULL,
     `PicturePath` varchar(255) DEFAULT NULL,
-    PRIMARY KEY (`Sifra`),
-    -- Setting Sifra as the primary key
-    UNIQUE KEY (`RedniBroj`) -- Unique constraint on RedniBroj
+    `LargePicturePath` varchar(255) DEFAULT NULL,
+    -- Added LargePicturePath column
+    PRIMARY KEY (`Sifra`)
 ) ENGINE = MyISAM AUTO_INCREMENT = 234 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 --
 -- Dumping data for table `delovi`

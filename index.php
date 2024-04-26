@@ -12,6 +12,7 @@ include 'connection.php';
     <title>Unos novog dela</title>
     <link rel="stylesheet" type="text/css" href="styles/index.css">
     <link rel="stylesheet" type="text/css" href="styles/add_firm.css">
+    <link rel="stylesheet" type="text/css" href="styles/image.css">
     <script>
         function showDeleteConfirmation(PorudzbinaID) {
             var modal = document.getElementById("deleteModal"); // Promijenjen ID
@@ -333,55 +334,87 @@ include 'connection.php';
         });
     </script>
 
-    <h1>Delovi</h1>
-    <a href="add_new_part.php" class="dugme">Unos novog dela</a>
 
-    <?php
-    $sql = "SELECT * FROM delovi";
-    $result = $conn->query($sql);
 
-    ?>
-    <div class="underlay">
-        <div class="table-wrapper">
-            <table class="custom-table">
-                <tr>
-                    <th> </th>
-                    <th>Sifra</th>
-                    <th>Naziv</th>
-                    <th>Vrsta Materijala</th>
-                    <th>Precnik Materijala</th>
-                    <th>Zastita</th>
-                    <th>Komadi Iz Sipke</th>
-                    <th>Mera Proizvoda Grami</th>
-                    <th>Akcija</th>
-                </tr>
-                <?php
-                // Check if there are rows in the result
-                if ($result->num_rows > 0) {
-                    // Loop through each row and display data in table cells
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td><img src='" . $row["PicturePath"] . "' alt='Slika'></td>";
+    <body>
 
-                        echo "<td>" . $row["Sifra"] . "</td>";
-                        echo "<td>" . $row["Naziv"] . "</td>";
-                        echo "<td>" . $row["VrstaMaterijala"] . "</td>";
-                        echo "<td>" . $row["Precnik"] . "</td>";
-                        echo "<td>" . $row["Zastita"] . "</td>";
-                        echo "<td>" . $row["KomadiIzSipke"] . "</td>";
-                        echo "<td>" . $row["MeraProizvodaGrami"] . "</td>";
-                        echo "<td><button class='dugme2' onclick='showDeleteConfirmation2(" . $row['Sifra'] . ")'>Obriši</button></td>";
-                        //   echo "<td><a href='delete_part.php?id=" . $row["Sifra"] . "' class='delete-button'>Delete</a></td>"; // Added delete button with link to delete_part.php
-                        echo "</tr>";
+
+
+
+        <h1>Delovi</h1>
+        <a href="add_new_part.php" class="dugme">Unos novog dela</a>
+
+        <?php
+        $sql = "SELECT * FROM delovi";
+        $result = $conn->query($sql);
+        ?>
+        <div class="underlay">
+            <div class="table-wrapper">
+                <table class="custom-table">
+                    <tr>
+                        <th> </th>
+                        <th>Sifra</th>
+                        <th>Naziv</th>
+                        <th>Vrsta Materijala</th>
+                        <th>Precnik Materijala</th>
+                        <th>Zastita</th>
+                        <th>Komadi Iz Sipke</th>
+                        <th>Mera Proizvoda Grami</th>
+                        <th>Akcija</th>
+                    </tr>
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td><img class='darken-on-hover' src='" . $row["PicturePath"] . "' alt='Slika' onclick='openLightbox(\"" . $row["PicturePath"] . "\")'></td>";
+                            echo "<td>" . $row["Sifra"] . "</td>";
+                            echo "<td>" . $row["Naziv"] . "</td>";
+                            echo "<td>" . $row["VrstaMaterijala"] . "</td>";
+                            echo "<td>" . $row["Precnik"] . "</td>";
+                            echo "<td>" . $row["Zastita"] . "</td>";
+                            echo "<td>" . $row["KomadiIzSipke"] . "</td>";
+                            echo "<td>" . $row["MeraProizvodaGrami"] . "</td>";
+                            echo "<td><button class='dugme2' onclick='showDeleteConfirmation2(" . $row['Sifra'] . ")'>Obriši</button></td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='9'>Nema podataka u tabeli.</td></tr>";
                     }
-                } else {
-                    echo "<tr><td colspan='9'>Nema podataka u tabeli.</td></tr>";
-                }
-                ?>
-            </table>
+                    ?>
+                </table>
+            </div>
         </div>
-    </div>
 
-</body>
+        <script>
+            // Funkcija za otvaranje lightbox-a i postavljanje slike
+            function openLightbox(imagePath) {
+                var lightbox = document.getElementById('lightbox');
+                var lightboxImg = document.getElementById('lightbox-img');
+                var body = document.body;
+
+                lightboxImg.src = imagePath;
+                lightbox.style.display = 'flex'; // Postavljanje prikaza na flex
+                body.style.overflow = 'hidden'; // Sprečavanje skrolovanja
+            }
+
+            // Funkcija za zatvaranje lightbox-a
+            function closeLightbox() {
+                var lightbox = document.getElementById('lightbox');
+                var body = document.body;
+
+                lightbox.style.display = 'none';
+                body.style.overflow = 'auto'; // Vratite skrolovanje
+            }
+        </script>
+
+        <div id="lightbox" class="lightbox">
+            <span class="close-btn" onclick="closeLightbox()">&times;</span>
+            <div class="lightbox-content">
+                <img id="lightbox-img" src="" alt="bigger image">
+            </div>
+        </div>
+
+    </body>
+
 
 </html>

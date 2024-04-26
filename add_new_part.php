@@ -77,10 +77,10 @@
             $picturePath = $targetFile;
 
 
-            $sql = "INSERT INTO delovi (RedniBroj, Sifra, Naziv, VrstaMaterijala, Precnik, Zastita, KomadiIzSipke, MeraProizvodaGrami, PicturePath)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO delovi (Sifra, Naziv, VrstaMaterijala, Precnik, Zastita, KomadiIzSipke, MeraProizvodaGrami, PicturePath)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sssssssss", $_POST['redni_broj'], $_POST['sifra'], $_POST['naziv'], $_POST['vrsta_materijala'], $_POST['precnik'], $_POST['zastita'], $_POST['komadi_iz_sipke'], $_POST['mera_proizvoda_grami'], $picturePath);
+            $stmt->bind_param("ssssssss",  $_POST['sifra'], $_POST['naziv'], $_POST['vrsta_materijala'], $_POST['precnik'], $_POST['zastita'], $_POST['komadi_iz_sipke'], $_POST['mera_proizvoda_grami'], $picturePath);
 
             // Execute prepared SQL statement
             if ($stmt->execute() === TRUE) {
