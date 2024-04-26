@@ -345,7 +345,7 @@ include 'connection.php';
         <div class="table-wrapper">
             <table class="custom-table">
                 <tr>
-                    <th></th>
+                    <th> </th>
                     <th>Sifra</th>
                     <th>Naziv</th>
                     <th>Vrsta Materijala</th>
@@ -353,6 +353,7 @@ include 'connection.php';
                     <th>Zastita</th>
                     <th>Komadi Iz Sipke</th>
                     <th>Mera Proizvoda Grami</th>
+                    <th>Akcija</th>
                 </tr>
                 <?php
                 // Check if there are rows in the result
@@ -361,13 +362,16 @@ include 'connection.php';
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td><img src='" . $row["PicturePath"] . "' alt='Slika'></td>";
+
                         echo "<td>" . $row["Sifra"] . "</td>";
                         echo "<td>" . $row["Naziv"] . "</td>";
                         echo "<td>" . $row["VrstaMaterijala"] . "</td>";
-                        echo "<td>" . $row["RedniBroj"] . "</td>";
+                        echo "<td>" . $row["Precnik"] . "</td>";
                         echo "<td>" . $row["Zastita"] . "</td>";
                         echo "<td>" . $row["KomadiIzSipke"] . "</td>";
                         echo "<td>" . $row["MeraProizvodaGrami"] . "</td>";
+                        echo "<td><button class='dugme2' onclick='showDeleteConfirmation2(" . $row['Sifra'] . ")'>Obriši</button></td>";
+                        //   echo "<td><a href='delete_part.php?id=" . $row["Sifra"] . "' class='delete-button'>Delete</a></td>"; // Added delete button with link to delete_part.php
                         echo "</tr>";
                     }
                 } else {

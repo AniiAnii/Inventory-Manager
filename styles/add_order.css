@@ -89,3 +89,22 @@ input[type="submit"]:hover {
     border-radius: 25px;
     z-index: -1;
 }
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    /* Increase bottom margin for spacing between form groups */
+}

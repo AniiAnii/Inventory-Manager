@@ -3,17 +3,16 @@
 
 <head>
     <title>Unos novog dela</title>
-    <link rel="stylesheet" type="text/css" href="styles/add_new_part_css.css">
+    <link rel="stylesheet" type="text/css" href="styles/add_order.css">
+
 </head>
 
-<body>
+<body class=" body">
 
-    <div class="header">
-        <a href="unos_novog_dela.php">Unos novog dela</a>
-    </div>
+
 
     <div class="container">
-        <h2>Unos novog dela</h2>
+        <h2 class="heading">Unos novog dela</h2>
 
         <?php
         // Initialize an empty array to store errors
@@ -55,10 +54,10 @@
 
             // Allow certain file formats
             if (
-                $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                $imageFileType != "jpg" && $imageFileType != "pdf" && $imageFileType != "png" && $imageFileType != "jpeg"
                 && $imageFileType != "gif"
             ) {
-                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                echo "Sorry, only PDF, JPG, JPEG, PNG & GIF files are allowed.";
                 $uploadOk = 0;
             }
 
@@ -78,10 +77,10 @@
             $picturePath = $targetFile;
 
 
-            $sql = "INSERT INTO delovi (RedniBroj, Sifra, Naziv, VrstaMaterijala, Zastita, KomadiIzSipke, MeraProizvodaGrami, PicturePath)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO delovi (RedniBroj, Sifra, Naziv, VrstaMaterijala, Precnik, Zastita, KomadiIzSipke, MeraProizvodaGrami, PicturePath)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ssssssss", $_POST['redni_broj'], $_POST['sifra'], $_POST['naziv'], $_POST['vrsta_materijala'], $_POST['zastita'], $_POST['komadi_iz_sipke'], $_POST['mera_proizvoda_grami'], $picturePath);
+            $stmt->bind_param("sssssssss", $_POST['redni_broj'], $_POST['sifra'], $_POST['naziv'], $_POST['vrsta_materijala'], $_POST['precnik'], $_POST['zastita'], $_POST['komadi_iz_sipke'], $_POST['mera_proizvoda_grami'], $picturePath);
 
             // Execute prepared SQL statement
             if ($stmt->execute() === TRUE) {
@@ -100,42 +99,42 @@
         <!-- Form for adding a new part -->
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data" class="form">
             <div class="form-group">
-                <label for="sifra">Sifra:</label>
-                <input type="text" id="sifra" name="sifra" class="form-control">
+                <label for="sifra" class="label">Sifra:</label>
+                <input type="text" id="sifra" name="sifra" class="input">
             </div>
 
             <div class="form-group">
-                <label for="naziv">Naziv:</label>
-                <input type="text" id="naziv" name="naziv" class="form-control">
+                <label for="naziv" class="label">Naziv:</label>
+                <input type="text" id="naziv" name="naziv" class="input">
             </div>
 
             <div class="form-group">
-                <label for="vrsta_materijala">Vrsta Materijala:</label>
-                <input type="text" id="vrsta_materijala" name="vrsta_materijala" class="form-control">
+                <label for="vrsta_materijala" class="label">Vrsta Materijala:</label>
+                <input type="text" id="vrsta_materijala" name="vrsta_materijala" class="input">
             </div>
 
             <div class="form-group">
-                <label for="redni_broj">Precnik Materijala:</label>
-                <input type="text" id="redni_broj" name="redni_broj" class="form-control">
+                <label for="precnik" class="label">Precnik Materijala:</label>
+                <input type="text" id="precnik" name="precnik" class="input">
             </div>
 
             <div class="form-group">
-                <label for="zastita">Mesto bavljenja povrsinske Zastita:</label>
-                <input type="text" id="zastita" name="zastita" class="form-control">
+                <label for="zastita" class="label">Mesto bavljenja povrsinske Zastita:</label>
+                <input type="text" id="zastita" name="zastita" class="input">
             </div>
 
             <div class="form-group">
-                <label for="komadi_iz_sipke">Komadi iz sipke:</label>
-                <input type="text" id="komadi_iz_sipke" name="komadi_iz_sipke" class="form-control">
+                <label for="komadi_iz_sipke" class="label">Komadi iz sipke:</label>
+                <input type="text" id="komadi_iz_sipke" name="komadi_iz_sipke" class="input">
             </div>
 
             <div class="form-group">
-                <label for="mera_proizvoda_grami">Mera proizvoda u gramima:</label>
-                <input type="text" id="mera_proizvoda_grami" name="mera_proizvoda_grami" class="form-control">
+                <label for="mera_proizvoda_grami" class="label">Mera proizvoda u gramima:</label>
+                <input type="text" id="mera_proizvoda_grami" name="mera_proizvoda_grami" class="input">
             </div>
 
             <div class="form-group">
-                <label for="picture">Picture:</label>
+                <label for="picture" class="label">Picture:</label>
                 <input type="file" id="picture" name="picture" accept="image/*" class="form-control-file">
             </div>
 

@@ -1,19 +1,20 @@
 <?php
+// Include your database connection file
 include 'connection.php';
 
-// Check if RedniBroj parameter is set in the URL
-if (isset($_GET['RedniBroj'])) {
+// Check if id parameter is set in the URL
+if (isset($_GET['id'])) {
     // Prepare a SQL statement
-    $sql = "DELETE FROM delovi WHERE RedniBroj = ?";
+    $sql = "DELETE FROM delovi WHERE Sifra = ?";
 
     // Prepare the SQL statement for execution
     $stmt = $conn->prepare($sql);
 
     // Bind the parameter to the SQL statement
-    $stmt->bind_param('i', $RedniBroj); // 'i' indicates integer type
+    $stmt->bind_param('i', $Sifra); // 'i' indicates integer type
 
     // Get RedniBroj value from GET parameter
-    $RedniBroj = $_GET['RedniBroj'];
+    $Sifra = $_GET['id']; // Updated to 'id' from the URL parameter
 
     // Execute the prepared statement
     if ($stmt->execute()) {
@@ -26,5 +27,5 @@ if (isset($_GET['RedniBroj'])) {
     // Close the statement
     $stmt->close();
 } else {
-    echo "RedniBroj parameter is not set.";
+    echo "ID parameter is not set.";
 }
