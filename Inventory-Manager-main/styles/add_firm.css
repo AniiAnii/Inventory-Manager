@@ -1,0 +1,112 @@
+.Firm_modal {
+    display: none;
+    /* Inicijalno sakrivanje modnog dijaloga */
+    position: fixed;
+    /* Fiksna pozicija */
+    z-index: 1;
+    /* Postavljanje prozora ispred ostalog sadržaja */
+    left: 50%;
+    /* Postavljanje leve ivice na 50% širine ekrana */
+    top: 50%;
+    /* Postavljanje gornje ivice na 50% visine ekrana */
+    transform: translate(-50%, -50%);
+    /* Pomeranje prozora za polovinu svoje širine i visine unazad, kako bi bio tačno u sredini */
+    width: 300px;
+    /* Širina modnog dijaloga */
+    background-color: rgb(230, 223, 197);
+    /* Boja pozadine */
+    padding: 20px;
+    /* Dodavanje prostora oko sadržaja */
+    border: 1px solid #8d8787;
+    /* Dodavanje ivice */
+    border-radius: 10px;
+    /* Zaobljene ivice */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Dodavanje senke */
+}
+
+.Firm_modal-content {
+    color: black;
+    /* Boja teksta */
+}
+
+.Firm_close {
+    color: rgb(76, 3, 3);
+    /* Boja ikonice zatvaranja */
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.Firm_close:hover,
+.Firm_close:focus {
+    color: darkgray;
+    /* Boja ikonice zatvaranja na hover */
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#addFirmForm {
+    margin-bottom: 20px;
+    /* Dodajte razmak ispod forme */
+}
+
+.firm_orders-container {
+    background-color: #2c3e50;
+    /* Tamno plava pozadina */
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.firm_order {
+    background-color: #34495e;
+    /* Srednje tamno plava pozadina */
+    color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.firm_order h3 {
+    margin-top: 0;
+}
+
+.firm_order p {
+    margin-bottom: 5px;
+}
+
+.firm_button {
+    background-color: #c2d1dc;
+    /* Plava boja dugmeta */
+    color: rgb(46, 43, 43);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.firm_order button:hover {
+    background-color: #1f618d;
+    /* Tamnija nijansa plave boje na hover */
+}
+
+::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #b0b0b0; /* Color of the scrollbar thumb */
+    border-radius: 5px; /* Radius of the scrollbar thumb */
+}
+
+::-webkit-scrollbar-track{
+    background-color: #202020; /* Color of the scrollbar track on hover */
+    
+}
+
+::-webkit-scrollbar-track:hover {
+    background-color: #000000; /* Color of the scrollbar track on hover */
+}
